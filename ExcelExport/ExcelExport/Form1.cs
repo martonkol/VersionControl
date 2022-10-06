@@ -156,5 +156,9 @@ namespace ExcelExport
             headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
         }
 
+        void Teszt()
+        {
+
+        }
     }
 }
