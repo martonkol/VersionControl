@@ -25,6 +25,7 @@ namespace UserMaintenance
             label1.Text = Resource1.FullName;
             button1.Text = Resource1.Add;
             button2.Text = Resource1.Write;
+            button3.Text = Resource1.Delete;
 
             //kijeloljuk a listbox forrasat (a user nevu binding list)
             listBox1.DataSource = users;
@@ -64,6 +65,11 @@ namespace UserMaintenance
                 sw.Close();
 
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            users.Clear();
         }
     }
 }
