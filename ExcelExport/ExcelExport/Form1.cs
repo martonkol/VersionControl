@@ -111,7 +111,18 @@ namespace ExcelExport
                 values[counter, 1] = item.Vendor;
                 values[counter, 2] = item.Side;
                 values[counter, 3] = item.District;
-                values[counter, 4] = item.Elevator;
+
+                //
+                if (item.Elevator)
+                {
+                    values[counter, 4] = "Van";
+                }
+                else
+                {
+                    values[counter, 4] = "Nincs";
+                }
+
+                //
                 values[counter, 5] = item.NumberOfRooms;
                 values[counter, 6] = item.FloorArea;
                 values[counter, 7] = item.Price;
