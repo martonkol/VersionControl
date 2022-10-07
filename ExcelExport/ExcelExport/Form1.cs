@@ -28,7 +28,7 @@ namespace ExcelExport
 
         public Form1()
         {
-            InitializeComponent();
+            //InitializeComponent();
             LoadData();
             CreateExcel();
         }
@@ -123,7 +123,8 @@ namespace ExcelExport
                         GetCell(2, 1),
                         GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
 
-            FormatTable();
+            FormatHeader();
+            FormatContent();
         }
 
 
@@ -144,7 +145,7 @@ namespace ExcelExport
             return ExcelCoordinate;
         }
         
-        void FormatTable()
+        void FormatHeader()
         {
             Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, 9)); //9 helyett headers.length kellene
             headerRange.Font.Bold = true;
@@ -156,9 +157,19 @@ namespace ExcelExport
             headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
         }
 
-        void Teszt()
+        void FormatContent()
         {
+            int lastRowID = xlSheet.UsedRange.Rows.Count;
+            Excel.Range contentRange = xlSheet.get_Range(GetCell(2, 1), GetCell(lastRowID, 9));
+            contentRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
 
+            Excel.Range lastcolumnRange = xlSheet.get_Range(GetCell(2, 9), GetCell(lastRowID, 9));
+            lastcolumnRange.Interior.Color = Color.LightGreen;
+            //lastcolumnRange.
+
+            Excel.Range firstcolumnRange = xlSheet.get_Range(GetCell(2, 1), GetCell(lastRowID, 1));
+            firstcolumnRange.Interior.Color = Color.LightYellow;
+            firstcolumnRange.Font.Bold = true;
         }
     }
 }
