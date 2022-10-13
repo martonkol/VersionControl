@@ -176,7 +176,7 @@ namespace ExcelExport
         void FormatContent()
         {
             int lastRowID = xlSheet.UsedRange.Rows.Count;
-            Excel.Range contentRange = xlSheet.get_Range(GetCell(2, 1), GetCell(lastRowID, 9));
+            Excel.Range contentRange = xlSheet.get_Range(GetCell(2, 1), GetCell(lastRowID, headers.Length));
             contentRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
 
             Excel.Range lastcolumnRange = xlSheet.get_Range(GetCell(2, 9), GetCell(lastRowID, 9));
