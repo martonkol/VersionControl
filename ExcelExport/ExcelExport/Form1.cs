@@ -26,6 +26,10 @@ namespace ExcelExport
         Excel.Worksheet xlSheet;
         //--
 
+        //egy string ami tartalmazza a fejleceket
+        public string[] headers;
+
+
         public Form1()
         {
             //InitializeComponent();
@@ -80,8 +84,7 @@ namespace ExcelExport
 
         void CreateTable()
         {
-            //egy string ami tartalmazza a fejleceket
-            string[] headers = new string[]
+            headers = new string[]
             {
                  "Kód",
                  "Eladó",
@@ -126,13 +129,15 @@ namespace ExcelExport
                 values[counter, 5] = item.NumberOfRooms;
                 values[counter, 6] = item.FloorArea;
                 values[counter, 7] = item.Price;
-                values[counter, 8] = string.Format("={0}/{1}",GetCell(counter+2,7),GetCell(counter+2,8));
+                values[counter, 8] = string.Format("={0}/{1}", GetCell(counter + 2, 8), GetCell(counter + 2, 7));
                 counter++;
             }
 
             xlSheet.get_Range(
                         GetCell(2, 1),
-                        GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+                        GetCell(1 + values.GetLength(0), values.GetLength(1))
+                        ).Value2 = values;
+            //xlSheet.getRange(A2 I33).Value2 = values
 
             FormatHeader();
             FormatContent();
@@ -158,7 +163,7 @@ namespace ExcelExport
         
         void FormatHeader()
         {
-            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, 9)); //9 helyett headers.length kellene
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length)); //9 helyett headers.length kellene
             headerRange.Font.Bold = true;
             headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
             headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
